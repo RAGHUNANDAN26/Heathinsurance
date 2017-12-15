@@ -10,7 +10,7 @@ library(readr) # CSV file I/O, e.g. the read_csv function
 #use setwd() and specify the path to the desired folder
 
 # read file and do some basic setup
-HealthCare<- read.csv("states.csv", stringsAsFactors = FALSE)
+HealthCare<- read.csv(".\\data\\usa_state_healtcare.csv", stringsAsFactors = FALSE)
 
 colnames(HealthCare) <- vector("State", 
                                "Uninsured_Rate_2010", 
@@ -84,7 +84,6 @@ aca_state2 <- HealthCare_state[complete.cases(HealthCare_state), ] # we'll just 
 aca_state2$State2 <- factor(aca_state2$State, levels =aca_state2[order(aca_state2$Medicaid_Enroll_Ch_2013_2016), "State"])
 
 #plot
-
 ggplot(aca_state2, aes(State2, Medicaid_Enroll_Ch_2013_2016, fill=State_Medicaid_Exp)) + 
   geom_bar(stat="identity") +
   coord_flip() +
