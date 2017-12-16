@@ -46,7 +46,7 @@ HealthCare$State <- as.factor(HealthCare$State)
 HealthCare$Uninsured_Rate_Ch_2010_2015 <- HealthCare$Uninsured_Rate_2015 - HealthCare$Uninsured_Rate_2010
 
 # create a data frame with just the US summary info and a set with just the states
-  HealthCare_state <- HealthCare[!HealthCare$State == "United States", ]
+HealthCare_state <- HealthCare[!HealthCare$State == "United States", ]
 HealthCare_US <- HealthCare[HealthCare$State == "United States", ]
 
 # drop unused factor levels (not really necessary, but I prefer it)
@@ -62,8 +62,8 @@ HealthCare_US <- HealthCare[HealthCare$State == "United States", ]
 # create a new State vector thats ordered by Uninsured Rate Change for better plotting
 library(ggplot2)
 
-HealthCare_state$State2 <- factor(HealthCare_state$State, levels =HealthCare_state[order(HealthCare_state$Uninsured_Rate_Ch_2010_2015), "State"])
-ggplot(HealthCare_state, aes(State2, Uninsured_Rate_Ch_2010_2015)) + 
+HealthCare_state$State <- factor(HealthCare_state$State, levels =HealthCare_state[order(HealthCare_state$Uninsured_Rate_Ch_2010_2015), "State"])
+ggplot(HealthCare_state, aes(State, Uninsured_Rate_Ch_2010_2015)) + 
   geom_bar(stat="identity", fill = "firebrick") +
   scale_y_continuous(labels = scales::percent) +
   coord_flip() +
